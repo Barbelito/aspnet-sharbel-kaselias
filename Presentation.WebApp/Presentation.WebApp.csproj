@@ -13,7 +13,6 @@
     <Folder Include="Views\Shared\Partials\Globals\" />
     <Folder Include="Views\Shared\Partials\Sections\" />
     <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
   <ItemGroup>
