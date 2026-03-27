@@ -9,10 +9,6 @@
   <ItemGroup>
     <Folder Include="Controllers\Common\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Shared\Layouts\" />
-    <Folder Include="Views\Shared\Partials\Globals\" />
-    <Folder Include="Views\Shared\Partials\Sections\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
