@@ -1,6 +1,6 @@
 using Application.Extensions;
 using Infrastructure.Extensions;
-using Infrastructure.Persistence;
+using Infrastructure.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 

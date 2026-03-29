@@ -8,6 +8,7 @@ public static class ApplicationServiceCollectionRegistrationExtensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
+        services.AddMemberServices();
         return services;
     }
 }
