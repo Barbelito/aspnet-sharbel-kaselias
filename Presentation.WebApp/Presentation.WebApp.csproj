@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Common\" />
-    <Folder Include="Models\Account\" />
-    <Folder Include="Models\Authentication\" />
   </ItemGroup>
 
   <ItemGroup>
