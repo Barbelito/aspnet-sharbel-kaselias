@@ -40,7 +40,7 @@ internal class MemberEntityConfiguration : IEntityTypeConfiguration<MemberEntity
             .IsUnique();
 
         builder
-            .HasOne<ApplicationUser>()
+            .HasOne(x => x.User)
             .WithOne(x => x.Member)
             .HasForeignKey<MemberEntity>(x => x.UserId)
             .OnDelete(DeleteBehavior.Cascade);

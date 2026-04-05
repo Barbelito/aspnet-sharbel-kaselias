@@ -1,41 +1,73 @@
 ﻿using Application.Abstractions.Identity;
 using Application.Members.Abstractions;
 using Application.Members.Inputs;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApp.Models.Authentication;
 
 namespace Presentation.WebApp.Controllers;
 
 [Route("authentication")]
-public class AuthenticationController(IRegisterMemberService registerMemberService, ISignInMemberService signInMemberService, IIdentityService identityService) : Controller
+public class AuthenticationController(
+    IRegisterMemberService registerMemberService,
+    ISignInMemberService signInMemberService,
+    IIdentityService identityService,
+    UserManager<ApplicationUser> userManager,
+    SignInManager<ApplicationUser> signInManager
+) : Controller
 {
     private const string RegistrationEmailSessionKey = "RegistrationEmail";
 
     [HttpGet("sign-in")]
-    public IActionResult SignIn()
+    public IActionResult SignIn(string? returnUrl = null)
     {
+        ViewBag.ReturnUrl = returnUrl;
         return View(new SignInForm());
     }
 
     [HttpPost("sign-in")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SignIn(SignInForm form, CancellationToken ct = default)
+    public async Task<IActionResult> SignIn(SignInForm form, string? returnUrl = null, CancellationToken ct = default)
     {
+        ViewBag.ReturnUrl = returnUrl;
+
         if (!ModelState.IsValid)
         {
+            ModelState.AddModelError(nameof(form.ErrorMessage), "Incorrect email address or password");
             return View(form);
         }
 
-        var input = new SignInInput(form.Email, form.Password, form.RememberMe);
-
-        var result = await signInMemberService.ExecuteAsync(input, ct);
-
-        if(!result.Success)
+        var user = await userManager.FindByEmailAsync(form.Email);
+        if (user is null)
         {
-            ModelState.AddModelError(string.Empty, result.ErrorMessage ?? "An error occurred while signing in.");
+            ModelState.AddModelError(nameof(form.ErrorMessage), "Incorrect email address or password");
             return View(form);
         }
-        return RedirectToAction("My", "Account");
+
+        var result = await signInManager.PasswordSignInAsync(
+            form.Email,
+            form.Password,
+            form.RememberMe,
+            true
+        );
+
+        if (result.Succeeded)
+        {
+            if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl);
+
+            return RedirectToAction("My", "Account");
+        }
+
+        if (result.IsLockedOut)
+        {
+            ModelState.AddModelError(nameof(form.ErrorMessage), "User account has been temporarily locked");
+            return View(form);
+        }
+
+        ModelState.AddModelError(nameof(form.ErrorMessage), "Incorrect email address or password");
+        return View(form);
     }
 
     [HttpPost("sign-out")]

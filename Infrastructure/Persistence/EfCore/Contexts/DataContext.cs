@@ -9,6 +9,7 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
 {
     override protected void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
     }
 

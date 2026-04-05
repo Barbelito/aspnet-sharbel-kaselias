@@ -44,6 +44,12 @@
     --form-input-border-color: var(--light-color);
     --form-input-text-color: var(--dark-color);
 
+    --form-checkbox-bg-color: var(--light-color);
+    --form-checkbox-border-color: var(--light-color);
+    --form-checkbox-checked-text-color: var(--dark-color);
+    --form-checkbox-checked-bg-color: var(--primary-color);
+    --form-checkbox-checked-border-color: var(--primary-color);
+
     --header-background-color: var(--dark-color);
     --header-text-color: var(--white-color);
 
