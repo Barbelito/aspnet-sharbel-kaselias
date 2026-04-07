@@ -375,6 +375,9 @@ input[type="checkbox"] {
 
 .form-errormessage {
     color: var(--danger-color);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .field-validation {
@@ -798,7 +801,7 @@ input[type="checkbox"] {
 /* auth section */
 .section__auth {
     background-color: var(--section-background-color);
-    padding: 4rem 4rem 1rem;
+    padding: 2rem 4rem 3rem;
     border-radius: 20px;
     max-width: 750px;
 }

@@ -5,49 +5,6 @@
     ViewData["Title"] = "Sign In";
 }
 
-@* <section class="auth-section">
-    <form class="auth-form" asp-action="SignIn" asp-controller="Authentication" method="post" novalidate>
-        <h1 class="title">Welcome Back!</h1>
-        <p class="information">
-            Log in to continue your fitness journey with full access to your customized program, training history, and progress tracking. Stay consistent, monitor your development, and keep moving forward with the structure and support built into your account.
-        </p>
-        <hr />
-
-        <div class="form-group">
-            <label class="form-label" asp-for="Email">Enter Your Credentials</label>
-            <input class="form-input" asp-for="Email" />
-        </div>
-
-        <div class="form-group">
-            <a class="forgot-password" asp-action="ForgotPassword" asp-controller="Authentication">
-                Forgot your password?
-            </a>
-            <input class="form-input" asp-for="Password" />
-        </div>
-
-        <div class="form-group checkbox">
-            <label class="custom-checkbox">
-                <input type="checkbox" asp-for="RememberMe" />
-                <span class="checkmark"></span>
-            </label>
-            <label class="form-label checkbox" asp-for="RememberMe">Remember Me</label>
-        </div>
-
-        <button class="form-button" type="submit">Continue</button>
-
-        @if (!string.IsNullOrWhiteSpace(ViewData["ErrorMessage"]?.ToString()))
-        {
-            <p class="additional-information">
-                @ViewData["ErrorMessage"]
-            </p>
-        }
-
-        <p class="additional-information">
-            Not a member?
-            <a asp-action="SignUp" asp-controller="Authentication">Become one</a>
-        </p>
-    </form>
-</section> *@
 <div class="page__auth-signin">
 
     <section class="section__auth">
@@ -80,13 +37,7 @@
             </div>
 
             <button class="btn" type="submit">Continue</button>
-            <div data-type="terms" class="form-group form-checkbox-group">
-                <input class="form-checkbox" asp-for="TermsAndConditions" />
-                <label class="form-checkbox-label" asp-for="TermsAndConditions">Accept user terms and conditions</label>
-            </div>
-            <div class="form-errormessage">
-                <span class="form-field-validation" asp-validation-for="TermsAndConditions"></span>
-            </div>
+
             <div class="form-errormessage">
                 <span class="field-validation-error" asp-validation-for="ErrorMessage"></span>
             </div>

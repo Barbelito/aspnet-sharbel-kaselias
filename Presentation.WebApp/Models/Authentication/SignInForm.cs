@@ -6,7 +6,7 @@ public class SignInForm
 {
     [Required(ErrorMessage = "Email is required")]
     [DataType(DataType.EmailAddress)]
-    [Display(Name = "Email", Prompt = "Enter Email Address")]
+    [Display(Name = "Email Address", Prompt = "Enter Email Address")]
     public string Email { get; set; } = null!;
 
     [Required(ErrorMessage = "Password is required")]

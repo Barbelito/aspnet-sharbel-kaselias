@@ -14,4 +14,8 @@ public class RegisterPasswordForm
     [DataType(DataType.Password)]
     [Display(Name = "Confirm Password", Prompt = "Confirm Password")]
     public string ConfirmPassword { get; set; } = null!;
+
+    [Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the terms and conditions")]
+    public bool TermsAndConditions { get; set; }
+    public string? ErrorMessage { get; set; }
 }
