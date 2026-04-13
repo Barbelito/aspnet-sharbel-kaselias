@@ -12,7 +12,7 @@ public static class MemberRegistrationExtension
         services.AddScoped<ISignInMemberService, SignInMemberService>();
         services.AddScoped<IGetMemberProfileService, GetMemberProfileService>();
         services.AddScoped<IUpdateMemberProfileService, UpdateMemberProfileService>();
-
+        services.AddScoped<IDeleteMemberProfileService, DeleteMemberProfileService>();
         return services;
     }
 }

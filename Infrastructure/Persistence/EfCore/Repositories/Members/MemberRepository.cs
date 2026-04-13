@@ -68,4 +68,18 @@ public class MemberRepository(DataContext context) : RepositoryBase<Member, stri
         catch { throw; }
 
     }
+
+    public async Task<bool> DeleteAsync(Member member, CancellationToken ct = default)
+    {
+        var entity = await Set.FirstOrDefaultAsync(x => x.Id == member.Id, ct);
+
+        if (entity is null)
+            return false;
+
+        Set.Remove(entity);
+
+        return await _context.SaveChangesAsync(ct) > 0;
+    }
+
+
 }

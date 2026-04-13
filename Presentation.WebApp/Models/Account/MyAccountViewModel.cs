@@ -8,4 +8,6 @@ public class MyAccountViewModel
     public string Email { get; set; } = string.Empty;
 
     public MyProfileForm AboutMeForm { get; set; } = null!;
+
+    public string? ProfileImageUri { get; set; }
 }
