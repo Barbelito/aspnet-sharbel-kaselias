@@ -272,22 +272,18 @@ a {
 
 /* global sections */
 header {
-    background-color: var(--header-background-color);
-    background-image: url(../images/dark-section-img.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
+    background: var(--header-background-color) url('../images/dark-section-img.png') center/cover no-repeat;
     color: var(--header-text-color);
     border-radius: 20px;
     padding: 0 0 1rem;
 }
-
     header:has(.section__hero) {
         padding: 0;
     }
 
 .page-title {
     text-align: center;
-    margin: 3rem 0;
+    margin: 2.5rem 0;
 }
 
 .auth-area {
@@ -451,7 +447,7 @@ input[type="checkbox"]:checked {
     align-items: center;
     background-size: 100%;
     color: var(--header-text-color);
-    padding: 2rem 2rem 1rem;
+    padding: 1.5rem 2rem 0.3rem;
 }
 
 @media (min-width: 768px) {
@@ -508,6 +504,91 @@ input[type="checkbox"]:checked {
         display: none;
     }
 }
+
+/* footer section */
+.section__footer {
+    background: var(--footer-background-color) url('/images/dark-section-img.png') center/cover no-repeat;
+    color: var(--footer-text-color);
+    border-radius: 20px;
+    padding: 3rem 1rem 1rem;
+    margin-bottom: 1rem;
+}
+
+    .section__footer hr {
+        border: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        margin: 2rem 0;
+    }
+
+        .section__footer hr.accent {
+            border-top-color: var(--text-accent-color);
+            opacity: 0.4;
+        }
+
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .footer-top {
+        justify-content: space-between;
+        text-align: left;
+        align-items: center;
+    }
+}
+
+.footer-tagline h3 {
+    color:var(--footer-text-color);
+    max-width: 500px;
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
+
+.footer-content {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.footer-location img {
+    width: 100%;
+    max-width: 260px;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+    .footer-right h5,
+    .footer-left h5 {
+        color: var(--footer-text-color);
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+    }
+
+@media (min-width: 768px) {
+    .footer-right {
+        text-align: right;
+    }
+}
+
+.footer-bottom {
+    text-align: center;
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+
+
 
 /* hero section */
 .section__hero {
@@ -1022,7 +1103,7 @@ input[type="checkbox"]:checked {
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     gap: 1rem;
-    height: 100dvh;
+    min-height: 100dvh;
     padding: 1rem;
 
     .page-title {
@@ -1092,6 +1173,7 @@ input[type="checkbox"]:checked {
         height: 200px;
         object-fit: cover;
         border-radius: 50%;
+        margin-bottom: 2rem;
     }
 }
 
