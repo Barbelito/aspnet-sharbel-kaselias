@@ -18,6 +18,5 @@ public class SignInForm
     public bool RememberMe { get; set; }
 
     [Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the terms and conditions")]
-    public bool TermsAndConditions { get; set; }
     public string? ErrorMessage { get; set; }
 }
