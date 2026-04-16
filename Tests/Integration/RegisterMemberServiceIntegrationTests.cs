@@ -1,16 +1,13 @@
-﻿using Application.Abstractions.Identity;
-using Application.Common.Results;
+﻿using Application.Members.Abstractions;
 using Application.Members.Inputs;
 using Application.Members.Services;
 using Domain.Abstractions.Repositories.Members;
-using Domain.Aggregates.Members;
-using Infrastructure.Persistence;
+using Infrastructure.Extensions.Identity;
 using Infrastructure.Persistence.EfCore.Contexts;
 using Infrastructure.Persistence.EfCore.Repositories.Members;
-using Infrastructure.Persistence.EfCore.Repositories;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Moq;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 public class RegisterMemberServiceIntegrationTests
@@ -18,40 +15,67 @@ public class RegisterMemberServiceIntegrationTests
     [Fact]
     public async Task ExecuteAsync_ShouldCreateMemberInDatabase_WhenUserIsCreatedSuccessfully()
     {
-        // Arrange – skapa en riktig in-memory SQLite-databas
+        // -------------------------
+        // Arrange: SQLite in-memory
+        // -------------------------
         var connection = new SqliteConnection("DataSource=:memory:");
         connection.Open();
 
-        var options = new DbContextOptionsBuilder<DataContext>()
-            .UseSqlite(connection)
-            .Options;
+        var services = new ServiceCollection();
 
-        using var context = new DataContext(options);
-        context.Database.EnsureCreated(); // Skapar tabellerna
+        // Required for ASP.NET Identity
+        services.AddLogging();
 
-        // Riktig repository
-        IMemberRepository memberRepository = new MemberRepository(context);
+        // EF Core
+        services.AddDbContext<DataContext>(options =>
+            options.UseSqlite(connection));
 
-        // Mockad IdentityService
-        var identityMock = new Mock<IIdentityService>();
-        identityMock
-            .Setup(x => x.CreateUserAsync("test@test.com", "Password123", default))
-            .ReturnsAsync(Result<string?>.Ok("user-123"));
+        var initProvider = services.BuildServiceProvider();
 
-        var service = new RegisterMemberService(identityMock.Object, memberRepository);
+        using (var scope = initProvider.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+            db.Database.EnsureCreated();
+        }
 
-        var input = new RegisterMemberInput("test@test.com", "Password123");
+        // Application services
+        services.AddScoped<IMemberRepository, MemberRepository>();
+        services.AddScoped<IRegisterMemberService, RegisterMemberService>();
 
-        // Act – kör hela flödet
+        // Identity (REAL)
+        services.AddIdentityServices();
+
+        var provider = services.BuildServiceProvider();
+
+        var service = provider.GetRequiredService<IRegisterMemberService>();
+
+        var input = new RegisterMemberInput(
+            "test@test.com",
+            "Password123.123");
+
+        // -------------------------
+        // Act
+        // -------------------------
         var result = await service.ExecuteAsync(input);
 
-        // Assert – kontrollera resultat
+        // -------------------------
+        // Assert: service result
+        // -------------------------
         Assert.True(result.Success);
-        Assert.Equal("user-123", result.Value);
+        Assert.False(string.IsNullOrWhiteSpace(result.Value));
 
-        // Assert – kontrollera att medlemmen faktiskt sparats i databasen
-        var savedMember = await context.Members.FirstOrDefaultAsync(m => m.UserId == "user-123");
-        Assert.NotNull(savedMember);
-        Assert.Equal("user-123", savedMember.UserId);
+        // -------------------------
+        // Assert: database state
+        // -------------------------
+        using (var scope = provider.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+
+            var savedMember = await db.Members
+                .FirstOrDefaultAsync(x => x.UserId == result.Value);
+
+            Assert.NotNull(savedMember);
+            Assert.Equal(result.Value, savedMember.UserId);
+        }
     }
 }
