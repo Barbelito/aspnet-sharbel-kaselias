@@ -1,0 +1,75 @@
+﻿@model ContactForm
+
+<section class="section_contact-form">
+    <div class="contact-image-wrapper">
+        <img class="contact-form-image"
+             src="~/images/contact-us-image.png"
+             alt="Woman working out at the gym" />
+
+        <div class="contact-overlay">
+
+            <div class="contact-item">
+                <div class="icon-circle phone"></div>
+                <div class="contact-text">
+                    <div class="label">Phone Number</div>
+                    <div class="value">+46 8 410 521 00</div>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="icon-circle email"></div>
+                <div class="contact-text">
+                    <div class="label">Email Address</div>
+                    <div class="value">info@corefitness.se</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <form id="contact-form" method="post" asp-action="Index" asp-controller="CustomerService" novalidate>
+        <div data-id="title" class="title">
+            <h3>Contact Us Today</h3>
+            <p>Ready to begin your fitness journey? Contact GymPro today and let our expert trainers guide you with the right program and support.</p>
+        </div>
+        <div data-id="first-name" class="form-group">
+            <label class="form-label" asp-for="FirstName"></label>
+            <div class="form-input-validation">
+                <input class="form-input" asp-for="FirstName" />
+                <span asp-validation-for="FirstName"></span>
+            </div>
+
+        </div>
+        <div data-id="last-name" class="form-group">
+            <label class="form-label" asp-for="LastName"></label>
+            <div class="form-input-validation">
+                <input class="form-input" asp-for="LastName" />
+                <span asp-validation-for="LastName"></span>
+            </div>
+        </div>
+        <div data-id="email" class="form-group">
+            <label class="form-label" asp-for="Email"></label>
+            <div class="form-input-validation">
+                <input class="form-input" asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+        </div>
+        <div data-id="phone" class="form-group">
+            <label class="form-label" asp-for="Phone"></label>
+            <div class="form-input-validation">
+                <input class="form-input" asp-for="Phone" />
+                <span asp-validation-for="Phone"></span>
+            </div>
+        </div>
+        <div data-id="message" class="form-group">
+            <label class="form-label" asp-for="Message"></label>
+            <div class="form-input-validation">
+                <textarea class="form-textarea" asp-for="Message"></textarea>
+                <span asp-validation-for="Message"></span>
+            </div>
+        </div>
+        <div class="cta-btn" data-id="submit-button">
+            <button type="submit" class="btn accent" href="#">Submit Message</button>
+        </div>
+
+    </form>
+</section>

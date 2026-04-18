@@ -1,5 +1,9 @@
 ﻿@{
-
+    string IsActive(string controllerName)
+    {
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+        return currentController == controllerName ? "active" : "";
+    }
 }
 
 <section class="section__header">
@@ -14,12 +18,93 @@
             <li class="menu-item">
                 <a class="menu-item-link" asp-action="Index" asp-controller="Memberships">Memberships</a>
             </li>
-            <li class="menu-item">
-                <a class="menu-item-link" asp-action="Index" asp-controller="Training">Training</a>
+            <li class="menu-item has-dropdown">
+                <a class="menu-item-link" asp-action="Index" asp-controller="Training">
+                    Training
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a asp-controller="Training" asp-action="Personal Training">Personal Training</a></li>
+                    <li><a asp-controller="Training" asp-action="Group Training">Group Training</a></li>
+                    <li><a asp-controller="Training" asp-action="Padel">Padel</a></li>
+                </ul>
             </li>
             <li class="menu-item">
-                <a class="menu-item-link" asp-action="Index" asp-controller="Support">Customer Service</a>
+                <a class="menu-item-link" asp-action="Index" asp-controller="CustomerService">Customer Service</a>
             </li>
+            <li class="menu-item">
+                <a class="menu-item-link" asp-action="Index" asp-controller="Store">Store</a>
+            </li>
+        </ul>
+    </nav>
+    <nav id="mobile-menu-flyout" class="mobile-menu">
+        <ul class="mobile-menu-list">
+
+            <li>
+                <a asp-controller="FitnessCenters" asp-action="Index">
+                    Fitness Centers
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Memberships" asp-action="Index">
+                    Memberships
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Training" asp-action="Index">
+                    Training
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="CustomerService" asp-action="Index">
+                    Customer Service
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Store" asp-action="Index">
+                    Store
+                </a>
+            </li>
+
+            <hr />
+
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <li>
+                    <form asp-area="Authentication" asp-controller="Authentication" asp-action="SignOut" method="post" class="inline-signout-form">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="mobile-menu-link btn-link">Sign Out</button>
+                    </form>
+                </li>
+
+
+                <li>
+                    <a asp-controller="Account" asp-action="My">
+                        My Account
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-controller="Authentication"
+                           asp-action="SignIn">
+                        Sign In
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Authentication"
+                           asp-action="SignUp">
+                        Become Member
+                    </a>
+                </li>
+            }
+
         </ul>
     </nav>
     <nav class="account-menu">
@@ -27,8 +112,12 @@
             @if (User.Identity?.IsAuthenticated ?? false)
             {
                 <li class="menu-item">
-                    <a class="menu-item-link" asp-area="Authentication" asp-controller="Authentication" asp-action="SignOut">Sign Out</a>
+                    <form asp-area="Authentication" asp-controller="Authentication" asp-action="SignOut" method="post" class="inline-signout-form">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="menu-item-link btn-link">Sign Out</button>
+                    </form>
                 </li>
+
                 <li class="menu-item">
                     <a class="btn menu-item-button" asp-controller="Account" asp-action="My">My Account</a>
                 </li>
@@ -36,15 +125,15 @@
             else
             {
                 <li class="menu-item">
-                    <a class="menu-item-link" asp-area="Authentication" asp-controller="Authentication" asp-action="SignUp">Become Member</a>
+                    <a class="menu-item-link" asp-controller="Authentication" asp-action="SignUp">Become Member</a>
                 </li>
 
                 <li class="menu-item">
-                    <a class="btn accent" asp-area="Authentication" asp-controller="Authentication" asp-action="SignIn">Sign In</a>
+                    <a class="btn accent" asp-controller="Authentication" asp-action="SignIn">Sign In</a>
                 </li>
             }
-            
 
+            
 
         </ul>
     </nav>

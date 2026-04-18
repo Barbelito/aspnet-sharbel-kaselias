@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Customer Service";
+}
+<div class="page_customer-service">
+    <div class="container">
+        <partial name="Partials/Sections/_ContactFormSection" />
+    </div>
+    <partial name="Partials/Sections/_FaqSection" />
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(function () {
+            const $form = $("#contact-form");
+            $form.on("submit", function (e) {
+                if (!$form.valid()) {
+                    e.preventDefault();
+                    $form.find(".input-validation-error, .field-validation-error").first().focus();
+                }
+            });
+        });
+    </script>
+}

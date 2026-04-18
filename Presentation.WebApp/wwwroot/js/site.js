@@ -1,4 +1,16 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(document).ready(function () {
 
-// Write your JavaScript code.
+    const $button = $("#mobile-menu-button");
+    const $menu = $("#mobile-menu-flyout");
+
+    $button.on("click", function () {
+
+        $menu.toggleClass("open");
+
+    });
+
+    $(".mobile-menu-list a").on("click", function () {
+        $menu.removeClass("open");
+    });
+
+});
