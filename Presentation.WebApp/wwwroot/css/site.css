@@ -148,7 +148,10 @@ a {
         max-width: 1320px;
     }
 }
-
+.menu-item-link.active {
+    color: var(--theme-color);
+    font-weight: 600;
+}
 .section-title {
     display: inline-block;
     background-color: var(--section-title-background-color);
@@ -341,7 +344,7 @@ form .form-checkbox-group-remember-me {
 }
 
     .form-input::placeholder {
-        opacity: 0.3;
+        opacity: 0.6;
     }
 
 .form-checkbox,
@@ -399,7 +402,6 @@ input[type="checkbox"] {
 input[type="file"] {
     width: 100%;
     max-width: 100%;
-    display: block;
 }
 
 @media (max-width: 768px) {
@@ -443,6 +445,7 @@ input[type="checkbox"]:checked {
 
 /* header section */
 .section__header {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
@@ -991,6 +994,7 @@ input[type="checkbox"]:checked {
 
 /* my account */
 .options-menu {
+    margin-top: 2rem;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
@@ -1053,19 +1057,31 @@ input[type="checkbox"]:checked {
         }
     }
 }
-
+.delete-account-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0rem 2rem 2rem;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+}
 .delete-account {
     background-color: var(--section-background-color);
-    padding: 1rem 2rem 2rem;
-    margin-bottom: 2rem;
+    padding: 0rem 2rem 2rem;
+    margin-bottom: 1rem;
     border-radius: 20px;
     text-align: center;
 }
 
-    .delete-account p {
-        margin: 2rem 1rem 2rem 1rem;
-    }
 
+.delete-account-link {
+    color: var(--danger-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight:900;
+}
 .delete-account-form {
     display: flex;
     flex-direction: column;
@@ -1121,7 +1137,7 @@ input[type="checkbox"]:checked {
         aside {
             display: grid;
             grid-auto-rows: min-content;
-            gap: 2rem;
+            gap: 0rem;
             align-items: start;
         }
 
@@ -1605,3 +1621,330 @@ input[type="checkbox"]:checked {
         font-size: 1.6rem;
     }
 }
+
+
+
+.section_contact-form {
+    background-color: var(--section-background-color);
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+    align-items: stretch;
+    margin-bottom: 5rem;
+}
+
+.contact-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.section_contact-form .contact-form-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-overlay {
+    position: absolute;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    background: rgba(140, 140, 140, 0.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--white-color);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.icon-circle.phone::before {
+    content: "\f2a0";
+    font-family: var(--font-fa);
+    font-weight: 900;
+}
+
+.icon-circle.email::before {
+    content: "\f0e0";
+    font-family: var(--font-fa);
+    font-weight: 900;
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--theme-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-color);
+    font-size: 25px;
+}
+
+
+.contact-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.contact-item .label {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.contact-item .value {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#contact-form {
+    padding: 3rem;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+}
+
+.section_contact-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    outline: none;
+    background-color: var(--form-input-background-color);
+    border: 1px solid var(--form-input-border-color);
+    color: var(--form-input-text-color);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+[data-id="submit-button"] {
+    display: flex;
+    justify-content: flex-start;
+}
+
+    [data-id="submit-button"] button.btn {
+        width: auto;
+        min-width: 180px;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+        [data-id="submit-button"] button.btn:hover {
+            background-color: var(--dark-color);
+            border-color: var(--dark-color);
+            color: var(--white-color);
+        }
+
+            [data-id="submit-button"] button.btn:hover::after {
+                color: var(--white-color);
+            }
+
+@media (min-width: 900px) {
+    #contact-form {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "title title"
+            "first last"
+            "email phone"
+            "message message"
+            "submit submit";
+    }
+
+    [data-id="title"] {
+        grid-area: title;
+        h3{
+            font-weight:600;
+            margin-bottom:1rem;
+        }
+    }
+
+    [data-id="first-name"] {
+        grid-area: first;
+    }
+
+    [data-id="last-name"] {
+        grid-area: last;
+    }
+
+    [data-id="email"] {
+        grid-area: email;
+    }
+
+    [data-id="phone"] {
+        grid-area: phone;
+    }
+
+    [data-id="message"] {
+        grid-area: message;
+    }
+
+    [data-id="submit-button"] {
+        grid-area: submit;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 1200px) {
+    .section_contact-form {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+
+    .contact-image-wrapper {
+        display: block;
+        position: relative;
+    }
+
+    .section_contact-form .contact-form-image {
+        display: none;
+    }
+
+    .contact-overlay {
+        position: static;
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(10px);
+        padding: 1rem 1.25rem;
+        border-radius: 16px;
+        color: var(--white-color);
+    }
+
+    #contact-form {
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .section_contact-form {
+        padding: 1.5rem;
+    }
+
+    .form-input,
+    .form-textarea {
+        padding: 0.8rem;
+    }
+}
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    left: 1rem;
+    background: var(--theme-color);
+    border-radius: 12px;
+    padding: 1rem;
+    z-index: 999;
+}
+
+.mobile-menu.open {
+    display: block;
+}
+
+.mobile-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    hr{
+        margin: 0rem;
+    }
+}
+
+.mobile-menu-list a {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 900;
+}
+
+
+.menu-item.has-dropdown > .menu-item-link::after {
+    content: "\f078";
+    font-family: var(--font-fa);
+    font-weight: 900;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+.menu-item.has-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--theme-color);
+    padding: 1rem;
+    border-radius: 12px;
+    min-width: 200px;
+    list-style: none;
+    z-index: 1000;
+}
+
+.menu-item.has-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 800;
+}
+.dropdown-menu li a {
+    position: relative;
+    padding-left: 1rem;
+}
+    .dropdown-menu li a::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: calc(50%);
+        transform: translateY(-50%);
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--dark-color);
+    }
