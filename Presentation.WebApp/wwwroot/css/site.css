@@ -1971,6 +1971,11 @@ input[type="checkbox"]:checked {
     font-weight: 900;
     font-size: 3.5rem;
 }
+
+.error-404 .btn {
+    margin-bottom: 7rem;
+}
+
 @media (max-width: 720px) {
     .error-404 h1 {
         font-size: 2rem;
@@ -1982,9 +1987,6 @@ input[type="checkbox"]:checked {
         color: var(--dark-gray-color);
     }
 
-    .error-404 .btn {
-        margin-bottom: 6rem;
-    }
 
     @media (max-width: 720px) {
         h1, h2 {
@@ -1992,3 +1994,4 @@ input[type="checkbox"]:checked {
             text-align: center;
         }
     }
+}
