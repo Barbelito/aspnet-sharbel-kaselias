@@ -130,9 +130,9 @@ public class AuthenticationController(
         var registerMemberInput = new RegisterMemberInput(email, form.Password);
 
         var registerResult = await registerMemberService.ExecuteAsync(registerMemberInput, ct);
-        if(!registerResult.Success)
+        if (!registerResult.Success)
         {
-            ModelState.AddModelError(string.Empty, registerResult.ErrorMessage ?? "An error occurred while registering.");
+            ModelState.AddModelError(nameof(form.Password), registerResult.ErrorMessage ?? "An error occurred while registering.");
             return View(form);
         }
         var signInMemberInput = new SignInInput(email, form.Password, false);
