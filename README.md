@@ -85,13 +85,13 @@ Design patterns used:
 1. Clone repository
 
 ```
-git clone https://github.com/Barbelito/aspnet-sharbel-kaselias.git
+git clone https://github.com/Barbelito/corefitness-aspnet-mvc.git
 ```
 
 2. Navigate to project
 
 ```
-cd aspnet-sharbel-kaselias
+cd corefitness-aspnet-mvc
 ```
 
 3. Apply migrations
